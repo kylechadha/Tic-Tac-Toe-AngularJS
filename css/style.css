@@ -1,113 +1,85 @@
-/*Questions:
-
-6. Best practices for creating "explainer text" -- use CSS or JS? JS onclick to remove display: none;?
-Left side div (float: left, set width so that the two below have to stacks)
->Div for nav
->Div for helper text
-
-*/
-
-/*To Do List:
-1. Clean up margins / formatting for cloud nav (floats, etc.) and container
-2. Add in "helper" div below nav
-3. Create mobile version / add responsiveness
-*/
-
-/* Document Styles */
-
 body {
-  background: url(../img/beyond-the-clouds-light-2560x1600.jpg) no-repeat center center;
-  /*background-size: cover;*/
-  user-select: none;
-  -webkit-user-select: none;  
-  -moz-user-select: none;    
+  -moz-user-select: none;
   -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /* Game Board Styles */
 
 h1 {
-  margin: 16px 0 6px 0;
+  color: black;
   font-family: 'Dancing Script', serif, sans-serif;
   font-size: 64px;
-  color: white;
+  margin: 16px 0 6px 0;
 }
 
-.container {
-  text-align: center;
+#container {
   margin: 0 auto;
+  text-align: center;
   width: 564px;
-  /*border: 2px solid red;*/
 }
 
 .threerules {
-  position: fixed;
-  right: 20px;
   bottom: 5px;
   color: white;
+  position: fixed;
+  right: 20px;
 }
 
 h2 {
-  margin-top: 20px;
   font-size: 12px;
+  margin-top: 20px;
 }
 
-h2 span {
-  color: steelblue;
-}
+h2 span {  color: steelblue }
 
 /* Cell Styles */
 
 .cell {
+  background-color: #58c9f2 !important;
+  border-radius: 4px;
   float: left;
   height: 130px;
-  width: 130px;
-  padding: 20px;
   margin: 9px;
-  background-color: white !important;
-  /*background-color: #58c9f2;  */
-  border-radius: 4px;
+  padding: 20px;
   transition: .3s;
+  width: 130px;
 }
 
-.cell:hover {
-  background-color: #FFC280 !important;
-}
-
-.cell:after {
-  content: "" !important;
-}
+.cell:hover {  background-color: #FFC280 !important }
+.cell:after {  content: "" !important }
 
 .xmove {
+  background-color: #FFC280;
   float: left;
   height: 130px;
-  width: 130px;
-  padding: 20px;
   margin: 9px;
-  background-color: #FFC280;
+  padding: 20px;
+  width: 130px;
 }
 
 .xmove:after {
   content: "X";
-  text-align: center;
   font-family: Verdana;
   font-size: 110px;
   line-height: 130px;
+  text-align: center;
 }
 
 .omove {
+  background-color: #FFC280;
   float: left;
   height: 130px;
-  width: 130px;
-  padding: 20px;
   margin: 9px;
-  background-color: #FFC280;
+  padding: 20px;
+  width: 130px;
 }
 
 .omove:after {
   content: "O";
-  text-align: center;
   font-family: Verdana;
   font-size: 110px;
   line-height: 130px;
+  text-align: center;
 }

@@ -1,0 +1,113 @@
+/*Questions:
+
+6. Best practices for creating "explainer text" -- use CSS or JS? JS onclick to remove display: none;?
+Left side div (float: left, set width so that the two below have to stacks)
+>Div for nav
+>Div for helper text
+
+*/
+
+/*To Do List:
+1. Clean up margins / formatting for cloud nav (floats, etc.) and container
+2. Add in "helper" div below nav
+3. Create mobile version / add responsiveness
+*/
+
+/* Document Styles */
+
+body {
+  background: url(../img/beyond-the-clouds-light-2560x1600.jpg) no-repeat center center;
+  /*background-size: cover;*/
+  user-select: none;
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;
+}
+
+/* Game Board Styles */
+
+h1 {
+  margin: 16px 0 6px 0;
+  font-family: 'Dancing Script', serif, sans-serif;
+  font-size: 64px;
+  color: white;
+}
+
+.container {
+  text-align: center;
+  margin: 0 auto;
+  width: 564px;
+  /*border: 2px solid red;*/
+}
+
+.threerules {
+  position: fixed;
+  right: 20px;
+  bottom: 5px;
+  color: white;
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+h2 span {
+  color: steelblue;
+}
+
+/* Cell Styles */
+
+.cell {
+  float: left;
+  height: 130px;
+  width: 130px;
+  padding: 20px;
+  margin: 9px;
+  background-color: white !important;
+  /*background-color: #58c9f2;  */
+  border-radius: 4px;
+  transition: .3s;
+}
+
+.cell:hover {
+  background-color: #FFC280 !important;
+}
+
+.cell:after {
+  content: "" !important;
+}
+
+.xmove {
+  float: left;
+  height: 130px;
+  width: 130px;
+  padding: 20px;
+  margin: 9px;
+  background-color: #FFC280;
+}
+
+.xmove:after {
+  content: "X";
+  text-align: center;
+  font-family: Verdana;
+  font-size: 110px;
+  line-height: 130px;
+}
+
+.omove {
+  float: left;
+  height: 130px;
+  width: 130px;
+  padding: 20px;
+  margin: 9px;
+  background-color: #FFC280;
+}
+
+.omove:after {
+  content: "O";
+  text-align: center;
+  font-family: Verdana;
+  font-size: 110px;
+  line-height: 130px;
+}
