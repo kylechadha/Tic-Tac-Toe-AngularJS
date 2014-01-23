@@ -22,7 +22,7 @@
 <div id="container">
   <h1>Tic Tac Toe</h1>
   <div ng-repeat="row in cells track by $index">
-    <div ng-repeat="cell in row track by $index" class="cell animated bounceIn" ng-click="place($parent.$index, $index)"></div>    
+    <div ng-repeat="cell in row track by $index" class="cell animated bounceIn" ng-click="playerMove($parent.$index, $index)"></div>    
   </div>
 </div>
 </body>

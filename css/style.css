@@ -1,3 +1,5 @@
+/* Document Styles */
+
 body {
   -moz-user-select: none;
   -ms-user-select: none;
@@ -32,7 +34,7 @@ h2 {
   margin-top: 20px;
 }
 
-h2 span {  color: steelblue }
+h2 span { color: steelblue }
 
 /* Cell Styles */
 
@@ -47,8 +49,8 @@ h2 span {  color: steelblue }
   width: 130px;
 }
 
-.cell:hover {  background-color: #FFC280 !important }
-.cell:after {  content: "" !important }
+.cell:hover { background-color: #FFC280 !important }
+.cell:after { content: "" !important }
 
 .xmove {
   background-color: #FFC280;
