@@ -24,7 +24,7 @@ h1 {
 
 .threerules {
   bottom: 5px;
-  color: white;
+  color: black;
   position: fixed;
   right: 20px;
 }
@@ -34,12 +34,12 @@ h2 {
   margin-top: 20px;
 }
 
-h2 span { color: steelblue }
+h2 span { color: tomato }
 
 /* Cell Styles */
 
 .cell {
-  background-color: #58c9f2 !important;
+  background-color: #58c9f2;
   border-radius: 4px;
   float: left;
   height: 130px;
@@ -49,8 +49,8 @@ h2 span { color: steelblue }
   width: 130px;
 }
 
-.cell:hover { background-color: #FFC280 !important }
-.cell:after { content: "" !important }
+.cell:hover { background-color: #FFC280 }
+.cell:after { content: "" }
 
 .xmove {
   background-color: #FFC280;
