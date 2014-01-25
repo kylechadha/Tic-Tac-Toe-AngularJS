@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="TicTac">
 <head>
   <title>Tic Tac Tangular</title>
   
@@ -7,6 +7,10 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   
+  <!-- Firebase -->
+  <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
+
   <!-- Fonts -->
   <link href='http://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'>
   <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Lato'>
@@ -21,7 +25,7 @@
 <body ng-controller="TicTacCtrl">
 <div id="container">
   <h1>Tic Tac Toe</h1>
-  <div ng-repeat="row in cells track by $index">
+  <div ng-repeat="row in game.cells track by $index">
     <div ng-repeat="cell in row track by $index" ng-class="{cell: true, animated: true, bounceIn: true, xmove: cell == 'X', omove: cell == 'O'}" ng-click="playerMove($parent.$index, $index)"></div>    
   </div>
   <h2 class="threerules">a<br>general assembly<br><span>Class 3</span><br>production</h2>
