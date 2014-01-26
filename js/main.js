@@ -1,6 +1,3 @@
-// To Do List 
-// 6. Deploy to heroku, push to github (and write readme), update pivotal tracker, and upload to your domain
-
 var app = angular.module("TicTac", ["firebase"])
 app.controller("TicTacCtrl", function($scope, $firebase) {
   
@@ -126,6 +123,5 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
       $scope.game.$save();     
     }
   }
-
 
 });
