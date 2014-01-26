@@ -11,4 +11,3 @@ Enjoy!
 
 Hosted live at:
 http://kylechadha.com/projects/tic-tac-toe-angularJS/
-http://tic-tac-toe-angularjs.herokuapp.com
