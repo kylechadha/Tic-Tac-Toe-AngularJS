@@ -15,7 +15,6 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
   var xWin = "XXX";
   var oWin = "OOO";
   var header = document.getElementsByTagName('h1');
-  $scope.animation = true;
 
   $scope.fbRoot.$on("loaded", function() {
     IDs = $scope.fbRoot.$getIndex();
@@ -24,7 +23,7 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
       $scope.fbRoot.$add( {
         cells: [['','',''],['','',''],['','','']],
         loadCount: 0,
-        turn: true,
+        turn: false,
         counter: 0,
         win: false
       });
@@ -38,32 +37,31 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
       $scope.game = $scope.fbRoot.$child(IDs[0]);
     };
 
-    setTimeout($scope.playerAssign,100);
+    setTimeout($scope.playerAssign, 1000);
   });
 
   $scope.playerAssign = function() {
-    console.log($scope.game.loadCount);
     $scope.game.loadCount++;
     $scope.animation = false;
     $scope.game.$save();
-    console.log($scope.game.loadCount);
     if ($scope.game.loadCount == 1) {
       player = 'X';
+      $scope.current = true;
     } else if ($scope.game.loadCount == 2) {
       player = 'O';
+      $scope.current = false;
     } else {
       player = 'Spectator';
     }    
-    console.log(player);
   }
   
   $scope.playerMove = function(r, c) {
     if ($scope.game.cells[r][c] == "" && $scope.game.win == false) {
-      if ($scope.game.turn && player == 'X') {
+      if (!$scope.game.turn && player == 'X') {
         $scope.game.cells[r][c] = 'X';
         $scope.game.counter++;
         $scope.game.turn = !$scope.game.turn;
-      } else if (!$scope.game.turn && player == 'O') {
+      } else if ($scope.game.turn && player == 'O') {
         $scope.game.cells[r][c] = 'O';      
         $scope.game.counter++;
         $scope.game.turn = !$scope.game.turn;
@@ -96,14 +94,16 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
   $scope.$watch('game.win', function() {
     if ($scope.game.win == "xwin" && player == 'X') {
       header[0].innerHTML = "Congrats, X Wins!";
+    } else if ($scope.game.win == "xwin" && player == 'O') {
+      header[0].innerHTML = "Better luck next time..."
     } else if ($scope.game.win == "owin" && player == 'O') {
       header[0].innerHTML = "Congrats, O Wins!";
+    } else if ($scope.game.win == "owin" && player == 'X') {
+      header[0].innerHTML = "Better luck next time..."
     } else if ($scope.game.win == "draw") {
       header[0].innerHTML = "Draw x_x";      
-    } else if ($scope.game.win != false) {
-      header[0].innerHTML = "Better luck next time!"
     }
-  })
+  });
 
   // $scope.revertCell = function() {
     // $scope.cells[r][c] = '';
@@ -116,5 +116,9 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
   //   $scope.game.win = false;
   //   $scope.game.counter = 0;
   // }
+
+  // CSS Class Management
+  $scope.animation = true;
+  $scope.current = true;
 
 });

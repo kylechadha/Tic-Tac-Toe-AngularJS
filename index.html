@@ -23,9 +23,12 @@
 </head>
 
 <body ng-controller="TicTacCtrl">
+<nav>
+  <div><h2><span ng-class="{player: current}">X</span> Player 1 <i class="fa fa-check" ng-class="{active: !game.turn}"></i> </h2></div>
+  <div><h2><span ng-class="{player: !current}">O</span> Player 2 <i class="fa fa-check" ng-class="{active: game.turn}"></i></h2></div>
+</nav>
 <div id="container">
   <h1>Tic Tac Toe</h1>
-  <h2>Player X</h2>
   <div ng-repeat="row in game.cells track by $index">
     <div ng-repeat="cell in row track by $index" ng-class="{cell: true, animated: animation, bounceIn: animation, xmove: cell == 'X', omove: cell == 'O'}" ng-click="playerMove($parent.$index, $index)"></div>    
   </div>
