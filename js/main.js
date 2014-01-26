@@ -1,6 +1,4 @@
 // To Do List 
-// 3. Fix reset button
-// 4. Add disappearing functionality
 // 6. Deploy to heroku, push to github (and write readme), update pivotal tracker, and upload to your domain
 
 var app = angular.module("TicTac", ["firebase"])
@@ -25,7 +23,8 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
         loadCount: 0,
         turn: false,
         counter: 0,
-        win: false
+        win: false,
+        reset: false
       });
       $scope.fbRoot.$on("change", function() {
         IDs = $scope.fbRoot.$getIndex();
@@ -40,6 +39,7 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
   });
 
   $scope.playerAssign = function() {
+    $scope.animation = false;
     $scope.game.loadCount++;
     $scope.game.$save();
     if ($scope.game.loadCount == 1) {
@@ -54,6 +54,7 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
   $scope.playerMove = function(r, c) {
     if ($scope.game.cells[r][c] == "" && $scope.game.win == false) {
       $scope.animation = false;
+      header[0].innerHTML = "Tic Tac Toe";
       if (!$scope.game.turn && $scope.player == 'X') {
         $scope.game.cells[r][c] = 'X';
         $scope.game.counter++;
@@ -65,7 +66,7 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
       }
       $scope.winAnalysis();
       $scope.game.$save();
-      // setTimeout($scope.revertCell(r, c), 5000);
+      setTimeout(function() {$scope.revertCell(r, c)}, 8000);
     }
   }
 
@@ -106,17 +107,25 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
 
   $scope.gameReset = function() {
     header[0].innerHTML = "Tic Tac Toe";
-    $scope.animation = true;
     $scope.game.cells = [['','',''],['','',''],['','','']];
     $scope.game.turn = false;
     $scope.game.win = false;
     $scope.game.counter = 0;
+    $scope.game.reset = true;
     $scope.game.$save();
   }
 
-  // $scope.revertCell = function() {
-    // $scope.cells[r][c] = '';
-  // }
+  $scope.$watch('game.reset', function() {
+    header[0].innerHTML = "Tic Tac Toe";
+  })
+
+  $scope.revertCell = function(r, c) {
+    if ($scope.game.win == false) {
+      $scope.game.counter -= 1;
+      $scope.game.cells[r][c] = '';
+      $scope.game.$save();     
+    }
+  }
 
 
 });
