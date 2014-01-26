@@ -32,24 +32,30 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
       $scope.fbRoot.$on("change", function() {
         IDs = $scope.fbRoot.$getIndex();
         $scope.game = $scope.fbRoot.$child(IDs[0]);
-        player = "X";
       });
     } else {
       //Why is there no on change function here (for player 2)?
       $scope.game = $scope.fbRoot.$child(IDs[0]);
-      player = "O";
     };
 
-    //Why is $scope.game still undefined at this point?!
-    // $scope.game.loadCount++;
-    // if ($scope.game.loadCount == 1) {
-    //   player = 'X';
-    // } else if ($scope.game.loadCount == 2) {
-    //   player = 'O';
-    // } else {
-    //   player = 'Spectator';
-    // }
+    setTimeout($scope.playerAssign,100);
   });
+
+  $scope.playerAssign = function() {
+    console.log($scope.game.loadCount);
+    $scope.game.loadCount++;
+    $scope.animation = false;
+    $scope.game.$save();
+    console.log($scope.game.loadCount);
+    if ($scope.game.loadCount == 1) {
+      player = 'X';
+    } else if ($scope.game.loadCount == 2) {
+      player = 'O';
+    } else {
+      player = 'Spectator';
+    }    
+    console.log(player);
+  }
   
   $scope.playerMove = function(r, c) {
     if ($scope.game.cells[r][c] == "" && $scope.game.win == false) {
@@ -63,7 +69,6 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
         $scope.game.turn = !$scope.game.turn;
       }
       $scope.winAnalysis();
-      $scope.animation = false;
       $scope.game.$save();
       // setTimeout($scope.revertCell(r, c), 5000);
     }
@@ -80,22 +85,25 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
     var diag2 = $scope.game.cells[0][2] + $scope.game.cells[1][1] + $scope.game.cells[2][0];
 
     if (xWin == row1 || xWin == row2 || xWin == row3 || xWin == col1 || xWin == col2 || xWin == col3 || xWin == diag1 || xWin == diag2) {
-      $scope.game.win = true;
+      $scope.game.win = "xwin";
     } else if (oWin == row1 || oWin == row2 || oWin == row3 || oWin == col1 || oWin == col2 || oWin == col3 || oWin == diag1 || oWin == diag2) {
-      header[0].innerHTML = "Congrats, O Wins!";
-      $scope.game.win = true;
+      $scope.game.win = "owin";
     } else if ($scope.game.counter == 9) {
-      header[0].innerHTML = "Draw x_x";
+      $scope.game.win = "draw";
     }
   }
 
-  // $scope.$watch('$scope.game.win', function(newValue, oldValue) {
-  //   if ($scope.game.win == true && (player == 'X' || player == 'Spectator')) {
-  //     header[0].innerHTML = "Congrats, X Wins!";
-  //   } else {
-  //     header[0].innerHTML = "Better luck next time!"
-  //   }
-  // })
+  $scope.$watch('game.win', function() {
+    if ($scope.game.win == "xwin" && player == 'X') {
+      header[0].innerHTML = "Congrats, X Wins!";
+    } else if ($scope.game.win == "owin" && player == 'O') {
+      header[0].innerHTML = "Congrats, O Wins!";
+    } else if ($scope.game.win == "draw") {
+      header[0].innerHTML = "Draw x_x";      
+    } else if ($scope.game.win != false) {
+      header[0].innerHTML = "Better luck next time!"
+    }
+  })
 
   // $scope.revertCell = function() {
     // $scope.cells[r][c] = '';
