@@ -1,8 +1,7 @@
 // To Do List 
-// 2. Add player 1 and player 2 notation & scoreboard
 // 3. Fix reset button
 // 4. Add disappearing functionality
-// 5. Clean up CSS & refactor
+// 6. Deploy to heroku, push to github (and write readme), update pivotal tracker, and upload to your domain
 
 var app = angular.module("TicTac", ["firebase"])
 app.controller("TicTacCtrl", function($scope, $firebase) {
@@ -11,10 +10,11 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
   $scope.fbRoot = $firebase(gameRef);
 
   var IDs;
-  var player;
   var xWin = "XXX";
   var oWin = "OOO";
   var header = document.getElementsByTagName('h1');
+  $scope.player;
+  $scope.animation = true;
 
   $scope.fbRoot.$on("loaded", function() {
     IDs = $scope.fbRoot.$getIndex();
@@ -27,7 +27,6 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
         counter: 0,
         win: false
       });
-      // Why does this occur on the onload? Or does it set it so ALL changes from here on trigger the function?
       $scope.fbRoot.$on("change", function() {
         IDs = $scope.fbRoot.$getIndex();
         $scope.game = $scope.fbRoot.$child(IDs[0]);
@@ -42,26 +41,24 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
 
   $scope.playerAssign = function() {
     $scope.game.loadCount++;
-    $scope.animation = false;
     $scope.game.$save();
     if ($scope.game.loadCount == 1) {
-      player = 'X';
-      $scope.current = true;
+      $scope.player = 'X';
     } else if ($scope.game.loadCount == 2) {
-      player = 'O';
-      $scope.current = false;
+      $scope.player = 'O';
     } else {
-      player = 'Spectator';
+      $scope.player = 'Spectator';
     }    
   }
   
   $scope.playerMove = function(r, c) {
     if ($scope.game.cells[r][c] == "" && $scope.game.win == false) {
-      if (!$scope.game.turn && player == 'X') {
+      $scope.animation = false;
+      if (!$scope.game.turn && $scope.player == 'X') {
         $scope.game.cells[r][c] = 'X';
         $scope.game.counter++;
         $scope.game.turn = !$scope.game.turn;
-      } else if ($scope.game.turn && player == 'O') {
+      } else if ($scope.game.turn && $scope.player == 'O') {
         $scope.game.cells[r][c] = 'O';      
         $scope.game.counter++;
         $scope.game.turn = !$scope.game.turn;
@@ -84,41 +81,42 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
 
     if (xWin == row1 || xWin == row2 || xWin == row3 || xWin == col1 || xWin == col2 || xWin == col3 || xWin == diag1 || xWin == diag2) {
       $scope.game.win = "xwin";
+      $scope.animation = true;
     } else if (oWin == row1 || oWin == row2 || oWin == row3 || oWin == col1 || oWin == col2 || oWin == col3 || oWin == diag1 || oWin == diag2) {
       $scope.game.win = "owin";
+      $scope.animation = true;
     } else if ($scope.game.counter == 9) {
       $scope.game.win = "draw";
     }
   }
 
   $scope.$watch('game.win', function() {
-    if ($scope.game.win == "xwin" && player == 'X') {
+    if ($scope.game.win == "xwin" && ($scope.player == 'X' || $scope.player == 'Spectator')) {
       header[0].innerHTML = "Congrats, X Wins!";
-    } else if ($scope.game.win == "xwin" && player == 'O') {
-      header[0].innerHTML = "Better luck next time..."
-    } else if ($scope.game.win == "owin" && player == 'O') {
+    } else if ($scope.game.win == "xwin" && $scope.player == 'O') {
+      header[0].innerHTML = "Sorry, X Wins!"
+    } else if ($scope.game.win == "owin" && ($scope.player == 'O' || $scope.player == 'Spectator')) {
       header[0].innerHTML = "Congrats, O Wins!";
-    } else if ($scope.game.win == "owin" && player == 'X') {
-      header[0].innerHTML = "Better luck next time..."
+    } else if ($scope.game.win == "owin" && $scope.player == 'X') {
+      header[0].innerHTML = "Sorry, O Wins!"
     } else if ($scope.game.win == "draw") {
       header[0].innerHTML = "Draw x_x";      
     }
   });
 
+  $scope.gameReset = function() {
+    header[0].innerHTML = "Tic Tac Toe";
+    $scope.animation = true;
+    $scope.game.cells = [['','',''],['','',''],['','','']];
+    $scope.game.turn = false;
+    $scope.game.win = false;
+    $scope.game.counter = 0;
+    $scope.game.$save();
+  }
+
   // $scope.revertCell = function() {
     // $scope.cells[r][c] = '';
   // }
 
-  // $scope.gameReset = function() {
-  //   $scope.game.cells = [['','',''],['','',''],['','','']];
-  //   header[0].innerHTML = "Tic Tac Toe";
-  //   $scope.game.turn = true;
-  //   $scope.game.win = false;
-  //   $scope.game.counter = 0;
-  // }
-
-  // CSS Class Management
-  $scope.animation = true;
-  $scope.current = true;
 
 });

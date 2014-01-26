@@ -1,6 +1,7 @@
 /* Document Styles */
 
 body {
+  background: url(../img/beyond-the-clouds-2560x1600-edited.jpg) no-repeat center center;
   -moz-user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
@@ -10,7 +11,7 @@ body {
 /* Game Board Styles */
 
 h1 {
-  color: black;
+  color: white;
   font-family: 'Dancing Script', serif, sans-serif;
   font-size: 64px;
   margin: 16px 0 6px 0;
@@ -22,20 +23,32 @@ h1 {
   width: 564px;
 }
 
+.threerules {
+  bottom: 5px;
+  color: white;
+  position: fixed;
+  right: 20px;
+  font-size: 12px;
+}
+
+.threerules span { color: black }
+
+/* Side Bar Styles */
+
 nav {
   float: left;
-  margin: 125px 0 0 70px;
+  margin: 125px 0 0 85px;
 }
 
 nav div {
-  background-color: rgb(230,230,230);
-  /*color: black;*/
+  background-color: rgba(255,255,255,0.3);
   border-radius: 4px;
-  padding: 5px 20px;
   margin-bottom: 20px;
+  padding: 5px 25px;
 }
 
 nav h2 {
+  color: white;
   font-family: 'Lato', serif, sans-serif;
   font-size: 20px;
   font-weight: normal;
@@ -47,35 +60,40 @@ nav span {
   font-family: 'Dancing Script', serif, sans-serif;
   font-size: 26px;
   font-weight: bold;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 nav i {
-  margin-left: 7px;
+  margin-left: 12px;
 }
 
 .player {
-  color: #5F9EB5;
+  color: #1D7A9D;
 }
 
 .active {
-  color: #FF7356;
+  color: yellow;
 }
 
-.threerules {
-  bottom: 5px;
-  color: black;
-  position: fixed;
-  right: 20px;
-  font-size: 12px;
+#reset {
+  cursor: pointer;
 }
 
-.threerules span { color: tomato }
+#reset:hover {
+  background-color: rgba(0,0,0,0.4);
+  transition: 0.4s;
+}
+
+.left-icon {
+  line-height: 32px;
+  margin-right: 18px;
+  margin-left: 0;
+}
 
 /* Cell Styles */
 
 .cell {
-  background-color: #58c9f2;
+  background-color: white;
   border-radius: 4px;
   float: left;
   height: 130px;
