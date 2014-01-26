@@ -8,3 +8,7 @@ Hi there, this repo is for a multi-player version of Tic Tac Toe. Built with Ang
 If you have any questions, don't hesitate to reach out @ kyle.chadha [at] gmail.com
 
 Enjoy!
+
+Hosted live at:
+http://kylechadha.com/projects/tic-tac-toe-angularJS/
+http://tic-tac-toe-angularjs.herokuapp.com
