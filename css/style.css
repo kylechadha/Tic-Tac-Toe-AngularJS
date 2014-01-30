@@ -117,7 +117,7 @@ nav i {
 
 .xmove:after {
   content: "X";
-  font-family: Verdana;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 110px;
   line-height: 130px;
   text-align: center;
@@ -134,7 +134,7 @@ nav i {
 
 .omove:after {
   content: "O";
-  font-family: Verdana;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 110px;
   line-height: 130px;
   text-align: center;

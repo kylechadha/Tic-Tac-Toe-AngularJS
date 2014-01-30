@@ -13,6 +13,7 @@
 
   <!-- Fonts -->
   <link href='http://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Ledger' rel='stylesheet' type='text/css'>
   <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Lato'>
   <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css">
 
@@ -48,17 +49,18 @@
     </h2>
   </div>
 
-  <div id="reset" ng-hide="player == 'Spectator'" ng-click="gameReset()">
-    <h2>
-      <i class="fa fa-power-off left-icon"></i>Reset
-    </h2>
-  </div>
-
   <div ng-show="player == 'Spectator'">
     <h2>
       <i class="fa fa-user left-icon" ng-class="{player: player == 'Spectator'}"></i>Spectator
     </h2>
   </div>
+
+  <div id="reset" ng-click="gameReset()">
+    <h2>
+      <i class="fa fa-power-off left-icon"></i>Reset
+    </h2>
+  </div>
+
 </nav>
 
 <div id="container">

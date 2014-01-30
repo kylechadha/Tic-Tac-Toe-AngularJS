@@ -63,7 +63,15 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
       }
       $scope.winAnalysis();
       $scope.game.$save();
-      setTimeout(function() {$scope.revertCell(r, c)}, 8000);
+      setTimeout(function() {$scope.revertCell(r, c)}, 10000);
+    }
+  }
+
+  $scope.revertCell = function(r, c) {
+    if ($scope.game.win == false) {
+      $scope.game.counter -= 1;
+      $scope.game.cells[r][c] = '';
+      $scope.game.$save();     
     }
   }
 
@@ -88,6 +96,17 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
     }
   }
 
+  $scope.gameReset = function() {
+    header[0].innerHTML = "Tic Tac Toe";
+    $scope.game.cells = [['','',''],['','',''],['','','']];
+    $scope.game.turn = false;
+    $scope.game.win = false;
+    $scope.game.counter = 0;
+    $scope.game.reset = true;
+    $scope.game.loadCount = 0;
+    $scope.game.$save();
+  }
+
   $scope.$watch('game.win', function() {
     if ($scope.game.win == "xwin" && ($scope.player == 'X' || $scope.player == 'Spectator')) {
       header[0].innerHTML = "Congrats, X Wins!";
@@ -102,26 +121,8 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
     }
   });
 
-  $scope.gameReset = function() {
-    header[0].innerHTML = "Tic Tac Toe";
-    $scope.game.cells = [['','',''],['','',''],['','','']];
-    $scope.game.turn = false;
-    $scope.game.win = false;
-    $scope.game.counter = 0;
-    $scope.game.reset = true;
-    $scope.game.$save();
-  }
-
   $scope.$watch('game.reset', function() {
     header[0].innerHTML = "Tic Tac Toe";
   })
-
-  $scope.revertCell = function(r, c) {
-    if ($scope.game.win == false) {
-      $scope.game.counter -= 1;
-      $scope.game.cells[r][c] = '';
-      $scope.game.$save();     
-    }
-  }
 
 });
