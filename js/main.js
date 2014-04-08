@@ -28,7 +28,6 @@ app.controller("TicTacCtrl", function($scope, $firebase) {
         $scope.game = $scope.fbRoot.$child(IDs[0]);
       });
     } else {
-      //Why is there no on change function here (for player 2)?
       $scope.game = $scope.fbRoot.$child(IDs[0]);
     };
 

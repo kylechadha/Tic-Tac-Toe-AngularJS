@@ -24,52 +24,53 @@
 </head>
 
 <body ng-controller="TicTacCtrl">
-<nav>
-  <div>
-    <h2>
-      <span ng-class="{player: player == 'X'}">X</span> Player 1 <i class="fa" 
-      ng-class="{
-      active: !game.turn, 
-      'fa-check': player != 'Spectator', 
-      'fa-spin': !game.turn && player == 'O', 
-      'fa-spinner': !game.turn && player == 'O', 
-      'fa-lock': player == 'Spectator'
-      }"></i> 
-    </h2>
+
+  <nav>
+    <div>
+      <h2>
+        <span ng-class="{player: player == 'X'}">X</span> Player 1 <i class="fa" 
+        ng-class="{
+        active: !game.turn, 
+        'fa-check': player != 'Spectator', 
+        'fa-spin': !game.turn && player == 'O', 
+        'fa-spinner': !game.turn && player == 'O', 
+        'fa-lock': player == 'Spectator'
+        }"></i> 
+      </h2>
+    </div>
+
+    <div>
+      <h2>
+        <span ng-class="{player: player == 'O'}">O</span> Player 2 <i class="fa" ng-class="{
+        active: game.turn, 
+        'fa-check': player != 'Spectator', 
+        'fa-spin': game.turn && player == 'X', 
+        'fa-spinner': game.turn && player == 'X', 
+        'fa-lock': player == 'Spectator'}"></i>
+      </h2>
+    </div>
+
+    <div ng-show="player == 'Spectator'">
+      <h2>
+        <i class="fa fa-user left-icon" ng-class="{player: player == 'Spectator'}"></i>Spectator
+      </h2>
+    </div>
+
+    <div id="reset" ng-click="gameReset()">
+      <h2>
+        <i class="fa fa-power-off left-icon"></i>Reset
+      </h2>
+    </div>
+  </nav>
+
+  <div id="container">
+    <h1>Tic Tac Toe</h1>
+    <div ng-repeat="row in game.cells track by $index">
+      <div ng-repeat="cell in row track by $index" ng-class="{cell: true, animated: animation, bounceIn: animation, xmove: cell == 'X', omove: cell == 'O'}" ng-click="playerMove($parent.$index, $index)"></div>    
+    </div>
+    <h2 class="threerules">a<br>general assembly<br><span>Class 3</span><br>production</h2>
   </div>
 
-  <div>
-    <h2>
-      <span ng-class="{player: player == 'O'}">O</span> Player 2 <i class="fa" ng-class="{
-      active: game.turn, 
-      'fa-check': player != 'Spectator', 
-      'fa-spin': game.turn && player == 'X', 
-      'fa-spinner': game.turn && player == 'X', 
-      'fa-lock': player == 'Spectator'}"></i>
-    </h2>
-  </div>
-
-  <div ng-show="player == 'Spectator'">
-    <h2>
-      <i class="fa fa-user left-icon" ng-class="{player: player == 'Spectator'}"></i>Spectator
-    </h2>
-  </div>
-
-  <div id="reset" ng-click="gameReset()">
-    <h2>
-      <i class="fa fa-power-off left-icon"></i>Reset
-    </h2>
-  </div>
-
-</nav>
-
-<div id="container">
-  <h1>Tic Tac Toe</h1>
-  <div ng-repeat="row in game.cells track by $index">
-    <div ng-repeat="cell in row track by $index" ng-class="{cell: true, animated: animation, bounceIn: animation, xmove: cell == 'X', omove: cell == 'O'}" ng-click="playerMove($parent.$index, $index)"></div>    
-  </div>
-  <h2 class="threerules">a<br>general assembly<br><span>Class 3</span><br>production</h2>
-</div>
 </body>
 
 </html>
